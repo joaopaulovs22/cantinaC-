@@ -55,7 +55,7 @@ namespace Cantina
                 cbbFuncionarios.Items.Add(DR.GetString(1));
             }
 
-           
+            Conexao.fecharConexao();
         }
 
         private void btnVoltar_Click(object sender, EventArgs e)
@@ -63,6 +63,68 @@ namespace Cantina
             frmMenuPrincipal abrir = new frmMenuPrincipal();
             abrir.Show();
             this.Hide();
+        }
+
+        public void selecionaCodigoFuncionario(string nome)
+        {
+            MySqlCommand comm = new MySqlCommand();
+            comm.CommandText = "select codFunc from tbFuncionarios where nome = @nome;";
+            comm.CommandType = CommandType.Text;
+
+            comm.Connection = Conexao.obterConexao();
+            comm.Parameters.Clear();
+
+            comm.Parameters.Add("@nome", MySqlDbType.VarChar, 100).Value = nome;
+
+            MySqlDataReader DR;
+            DR = comm.ExecuteReader();
+            DR.Read();
+
+           codFunc = DR.GetInt32(0);
+
+            Conexao.fecharConexao();
+        }
+
+        private void cbbFuncionarios_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selecionaCodigoFuncionario(cbbFuncionarios.SelectedItem.ToString());
+        }
+
+        public int codFunc;
+
+        public int cadastrarUsuario(int codFunc)
+        {
+            MySqlCommand comm = new MySqlCommand();
+            comm.CommandText = "insert into tbUsuarios(nome,senha,codFunc) values(@nome,@senha,@codFunc);";
+            comm.CommandType = CommandType.Text;
+
+            comm.Connection = Conexao.obterConexao();
+
+            comm.Parameters.Clear();
+            comm.Parameters.Add("@nome", MySqlDbType.VarChar,25).Value = txtUsuario.Text;
+            comm.Parameters.Add("@senha", MySqlDbType.VarChar, 10).Value = txtSenha.Text;
+            comm.Parameters.Add("@codFunc", MySqlDbType.Int32, 11).Value = codFunc;
+
+            int res = comm.ExecuteNonQuery();
+
+            return res;
+
+
+            Conexao.fecharConexao();
+        }
+
+        private void btnCadastrar_Click(object sender, EventArgs e)
+        {
+           int resultado = cadastrarUsuario(codFunc);
+
+            if (resultado ==1)
+            {
+                MessageBox.Show("Cadastrado com sucesso!!");
+            }
+            else
+            {
+                MessageBox.Show("Erro ao cadastrar!!");
+            }
         }
     }
 }
