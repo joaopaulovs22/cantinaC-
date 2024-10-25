@@ -90,8 +90,43 @@ namespace Cantina
         private void cbbFuncionarios_SelectedIndexChanged(object sender, EventArgs e)
         {
            lblMostrarCodigoFuncionario.Text = selecionaCodigoFuncionario(cbbFuncionarios.SelectedItem.ToString()).ToString();
+            selecionarUsuarios(Convert.ToInt32(lblMostrarCodigoFuncionario.Text));
         }
 
+        public void selecionarUsuarios(int codFunc)
+        {
+            MySqlCommand comm = new MySqlCommand();
+            comm.CommandText = "SELECT codUsu,nome,senha FROM tbusuarios WHERE codFunc =@codFunc;";
+            comm.CommandType = CommandType.Text;
+
+            comm.Connection = Conexao.obterConexao();
+
+            comm.Parameters.Clear();
+            comm.Parameters.Add("@codFunc", MySqlDbType.Int32, 11).Value = codFunc;
+
+            MySqlDataReader DR;
+
+            DR = comm.ExecuteReader();
+            DR.Read();
+            try
+            {
+                txtCodigo.Text = DR.GetInt32(0).ToString();
+                txtUsuario.Text = DR.GetString(1);
+                txtSenha.Text = DR.GetString(2);
+
+                Conexao.fecharConexao();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Funcionário sem usuário.");
+                txtUsuario.Clear();
+                txtSenha.Clear();
+                txtCodigo.Clear();
+                txtUsuario.Focus();
+            }
+        }
+
+        //variável global
         public int codFunc;
 
         public int cadastrarUsuario(int codFunc)
