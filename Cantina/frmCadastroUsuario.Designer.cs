@@ -47,9 +47,9 @@ namespace Cantina
             this.lblRepetirSenha = new System.Windows.Forms.Label();
             this.txtRepetirSenha = new System.Windows.Forms.TextBox();
             this.gpbDadosPessoais = new System.Windows.Forms.GroupBox();
-            this.cbbFuncionarios = new System.Windows.Forms.ComboBox();
-            this.lblFuncionarios = new System.Windows.Forms.Label();
             this.lblMostrarCodigoFuncionario = new System.Windows.Forms.Label();
+            this.lblFuncionarios = new System.Windows.Forms.Label();
+            this.cbbFuncionarios = new System.Windows.Forms.ComboBox();
             this.pnlCRUD.SuspendLayout();
             this.gpbDadosPessoais.SuspendLayout();
             this.SuspendLayout();
@@ -139,6 +139,7 @@ namespace Cantina
             this.btnNovo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnNovo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnNovo.UseVisualStyleBackColor = true;
+            this.btnNovo.Click += new System.EventHandler(this.btnNovo_Click);
             // 
             // pnlCRUD
             // 
@@ -247,14 +248,14 @@ namespace Cantina
             this.gpbDadosPessoais.TabStop = false;
             this.gpbDadosPessoais.Text = "Dados pessoais";
             // 
-            // cbbFuncionarios
+            // lblMostrarCodigoFuncionario
             // 
-            this.cbbFuncionarios.FormattingEnabled = true;
-            this.cbbFuncionarios.Location = new System.Drawing.Point(450, 68);
-            this.cbbFuncionarios.Name = "cbbFuncionarios";
-            this.cbbFuncionarios.Size = new System.Drawing.Size(293, 28);
-            this.cbbFuncionarios.TabIndex = 19;
-            this.cbbFuncionarios.SelectedIndexChanged += new System.EventHandler(this.cbbFuncionarios_SelectedIndexChanged);
+            this.lblMostrarCodigoFuncionario.AutoSize = true;
+            this.lblMostrarCodigoFuncionario.Location = new System.Drawing.Point(490, 113);
+            this.lblMostrarCodigoFuncionario.Name = "lblMostrarCodigoFuncionario";
+            this.lblMostrarCodigoFuncionario.Size = new System.Drawing.Size(218, 20);
+            this.lblMostrarCodigoFuncionario.TabIndex = 21;
+            this.lblMostrarCodigoFuncionario.Text = "Mostrar código do funcionário";
             // 
             // lblFuncionarios
             // 
@@ -265,14 +266,14 @@ namespace Cantina
             this.lblFuncionarios.TabIndex = 20;
             this.lblFuncionarios.Text = "Funcionários";
             // 
-            // lblMostrarCodigoFuncionario
+            // cbbFuncionarios
             // 
-            this.lblMostrarCodigoFuncionario.AutoSize = true;
-            this.lblMostrarCodigoFuncionario.Location = new System.Drawing.Point(490, 113);
-            this.lblMostrarCodigoFuncionario.Name = "lblMostrarCodigoFuncionario";
-            this.lblMostrarCodigoFuncionario.Size = new System.Drawing.Size(218, 20);
-            this.lblMostrarCodigoFuncionario.TabIndex = 21;
-            this.lblMostrarCodigoFuncionario.Text = "Mostrar código do funcionário";
+            this.cbbFuncionarios.FormattingEnabled = true;
+            this.cbbFuncionarios.Location = new System.Drawing.Point(450, 68);
+            this.cbbFuncionarios.Name = "cbbFuncionarios";
+            this.cbbFuncionarios.Size = new System.Drawing.Size(293, 28);
+            this.cbbFuncionarios.TabIndex = 19;
+            this.cbbFuncionarios.SelectedIndexChanged += new System.EventHandler(this.cbbFuncionarios_SelectedIndexChanged);
             // 
             // frmCadastroUsuario
             // 

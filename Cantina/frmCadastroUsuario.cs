@@ -28,6 +28,7 @@ namespace Cantina
         {
             InitializeComponent();
             carregaFuncionarios();
+            desabilitarCampos();
         }
 
         private void frmCadastroUsuario_Load(object sender, EventArgs e)
@@ -123,6 +124,7 @@ namespace Cantina
                 txtSenha.Clear();
                 txtCodigo.Clear();
                 txtUsuario.Focus();
+                habilitarCamposCadastrar();
             }
         }
 
@@ -152,6 +154,10 @@ namespace Cantina
 
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
+            if (txtSenha.Text.Equals(txtRepetirSenha.Text))
+            {
+
+        
            int resultado = cadastrarUsuario(codFunc);
 
             if (resultado ==1)
@@ -162,6 +168,49 @@ namespace Cantina
             {
                 MessageBox.Show("Erro ao cadastrar!!");
             }
+           }
+            else
+            {
+                MessageBox.Show("A senha não é igual!!");
+                txtSenha.Clear();
+                txtRepetirSenha.Clear();
+                txtSenha.Focus();
+            }
+        }
+
+        public void desabilitarCampos()
+        {
+            txtUsuario.Enabled = false;
+            txtSenha.Enabled = false;
+            txtRepetirSenha.Enabled = false;
+            btnCadastrar.Enabled = false;
+            btnAlterar.Enabled = false;
+            btnExcluir.Enabled = false;
+            btnLimpar.Enabled = false;
+            btnNovo.Enabled = false;
+
+        }
+
+
+        public void habilitarCamposCadastrar()
+        {
+            txtUsuario.Enabled = true;
+            txtSenha.Enabled = true;
+            txtRepetirSenha.Enabled = true;
+            btnCadastrar.Enabled = true;
+            btnAlterar.Enabled = false;
+            btnExcluir.Enabled = false;
+            btnLimpar.Enabled = true;
+            btnNovo.Enabled = false;
+            txtUsuario.Focus();
+        }
+            private void btnNovo_Click(object sender, EventArgs e)
+        {
+            habilitarCamposCadastrar();
+
         }
     }
+
+
+
 }
