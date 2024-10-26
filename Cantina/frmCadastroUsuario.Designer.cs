@@ -256,6 +256,7 @@ namespace Cantina
             this.lblMostrarCodigoFuncionario.Size = new System.Drawing.Size(218, 20);
             this.lblMostrarCodigoFuncionario.TabIndex = 21;
             this.lblMostrarCodigoFuncionario.Text = "Mostrar código do funcionário";
+            this.lblMostrarCodigoFuncionario.Visible = false;
             // 
             // lblFuncionarios
             // 

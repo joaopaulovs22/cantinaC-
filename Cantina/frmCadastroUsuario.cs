@@ -81,7 +81,7 @@ namespace Cantina
             DR = comm.ExecuteReader();
             DR.Read();
 
-           codFunc = DR.GetInt32(0);
+            codFunc = DR.GetInt32(0);
 
             return codFunc;
 
@@ -90,7 +90,7 @@ namespace Cantina
 
         private void cbbFuncionarios_SelectedIndexChanged(object sender, EventArgs e)
         {
-           lblMostrarCodigoFuncionario.Text = selecionaCodigoFuncionario(cbbFuncionarios.SelectedItem.ToString()).ToString();
+            lblMostrarCodigoFuncionario.Text = selecionaCodigoFuncionario(cbbFuncionarios.SelectedItem.ToString()).ToString();
             selecionarUsuarios(Convert.ToInt32(lblMostrarCodigoFuncionario.Text));
         }
 
@@ -140,7 +140,7 @@ namespace Cantina
             comm.Connection = Conexao.obterConexao();
 
             comm.Parameters.Clear();
-            comm.Parameters.Add("@nome", MySqlDbType.VarChar,25).Value = txtUsuario.Text;
+            comm.Parameters.Add("@nome", MySqlDbType.VarChar, 25).Value = txtUsuario.Text;
             comm.Parameters.Add("@senha", MySqlDbType.VarChar, 10).Value = txtSenha.Text;
             comm.Parameters.Add("@codFunc", MySqlDbType.Int32, 11).Value = codFunc;
 
@@ -157,18 +157,20 @@ namespace Cantina
             if (txtSenha.Text.Equals(txtRepetirSenha.Text))
             {
 
-        
-           int resultado = cadastrarUsuario(codFunc);
 
-            if (resultado ==1)
-            {
-                MessageBox.Show("Cadastrado com sucesso!!");
+                int resultado = cadastrarUsuario(codFunc);
+
+                if (resultado == 1)
+                {
+                    MessageBox.Show("Cadastrado com sucesso!!");
+                    desabilitarCampos();
+
+                }
+                else
+                {
+                    MessageBox.Show("Erro ao cadastrar!!");
+                }
             }
-            else
-            {
-                MessageBox.Show("Erro ao cadastrar!!");
-            }
-           }
             else
             {
                 MessageBox.Show("A senha não é igual!!");
@@ -176,6 +178,15 @@ namespace Cantina
                 txtRepetirSenha.Clear();
                 txtSenha.Focus();
             }
+        }
+
+        public void limparCampos()
+        {
+            txtCodigo.Clear();
+            txtUsuario.Clear();
+            txtSenha.Clear();
+            txtRepetirSenha.Clear();
+            cbbFuncionarios.Text = "";
         }
 
         public void desabilitarCampos()
